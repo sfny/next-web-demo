@@ -23,7 +23,7 @@ export default class extends React.Component {
       signinBtn: React.PropTypes.boolean
     }
   }
-  
+
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +33,7 @@ export default class extends React.Component {
     }
     this.toggleModal = this.toggleModal.bind(this)
   }
-  
+
   async toggleModal(e) {
     if (e) e.preventDefault()
 
@@ -48,53 +48,36 @@ export default class extends React.Component {
       modal: !this.state.modal
     })
   }
-  
+
   render() {
     return (
       <React.Fragment>
         <Head>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
-          <title>{this.props.title || 'Next.js Starter Project'}</title>
+          <title>{this.props.title || 'Glean'}</title>
           <style dangerouslySetInnerHTML={{__html: Styles}}/>
           <script src="https://cdn.polyfill.io/v2/polyfill.min.js"/>
         </Head>
-        <Navbar light className="navbar navbar-expand-md pt-3 pb-3">
-          <Link prefetch href="/">
-            <NavbarBrand href="/">
-              <span className="icon ion-md-home mr-1"></span> {Package.name}
-            </NavbarBrand>
-          </Link>
-          <input className="nojs-navbar-check" id="nojs-navbar-check" type="checkbox" aria-label="Menu"/>
-          <label tabIndex="1" htmlFor="nojs-navbar-check" className="nojs-navbar-label mt-2" />
-          <div className="nojs-navbar">
-            <Nav navbar>
-              <div tabIndex="1" className="dropdown nojs-dropdown">
-                <div className="nav-item">
-                  <span className="dropdown-toggle nav-link">Examples</span>
-                </div>
-                <div className="dropdown-menu">
-                  <Link prefetch href="/examples/authentication">
-                    <a href="/examples/authentication" className="dropdown-item">Auth</a>
-                  </Link>
-                  <Link prefetch href="/examples/async">
-                    <a href="/examples/async" className="dropdown-item">Async Data</a>
-                  </Link>
-                  <Link prefetch href="/examples/layout">
-                    <a href="/examples/layout" className="dropdown-item">Layout</a>
-                  </Link>
-                  <Link prefetch href="/examples/routing">
-                    <a href="/examples/routing" className="dropdown-item">Routing</a>
-                  </Link>
-                  <Link prefetch href="/examples/styling">
-                    <a href="/examples/styling" className="dropdown-item">Styling</a>
-                  </Link>
-                </div>
-              </div>
+        <Navbar light expand="sm">
+        <div className="container">
+          <NavbarBrand href='/index'><h3>Glean</h3></NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.navbarTogglerOpen} navbar>
+            <Nav navbar className='nojs-navbar'>
+              <NavItem className='px-2'>
+                <NavLink href="/howitworks">How It Works</NavLink>
+              </NavItem>
+              <NavItem className='px-2'>
+                <NavLink href="/pricing">Pricing</NavLink>
+              </NavItem>
+              <NavItem className='px-2'>
+                <NavLink href="/about">About</NavLink>
+              </NavItem>
             </Nav>
-            <UserMenu session={this.props.session} toggleModal={this.toggleModal} signinBtn={this.props.signinBtn}/>
-          </div>
-        </Navbar>
+          </Collapse>
+        </div>
+      </Navbar>
         <MainBody navmenu={this.props.navmenu} fluid={this.props.fluid} container={this.props.container}>
           {this.props.children}
         </MainBody>
@@ -134,28 +117,8 @@ export class MainBody extends React.Component {
       return (
         <Container fluid={this.props.fluid} style={{marginTop: '1em'}}>
           <Row>
-            <Col xs="12" md="9" lg="10">
+            <Col xs="12">
               {this.props.children}
-            </Col>
-            <Col xs="12" md="3" lg="2" style={{paddingTop: '1em'}}>
-              <h5 className="text-muted text-uppercase">Examples</h5>
-              <ListGroup>
-                <ListGroupItem>
-                  <Link prefetch href="/examples/authentication"><a href="/examples/authentication" className="d-block">Auth</a></Link>
-                </ListGroupItem>
-                <ListGroupItem>
-                    <Link prefetch href="/examples/async"><a href="/examples/async" className="d-block">Async</a></Link>
-                </ListGroupItem>
-                <ListGroupItem>
-                  <Link prefetch href="/examples/layout"><a href="/examples/layout" className="d-block">Layout</a></Link>
-                </ListGroupItem>
-                <ListGroupItem>
-                  <Link prefetch href="/examples/routing"><a href="/examples/routing" className="d-block">Routing</a></Link>
-                </ListGroupItem>
-                <ListGroupItem>
-                    <Link prefetch href="/examples/styling"><a href="/examples/styling" className="d-block">Styling</a></Link>
-                </ListGroupItem>
-              </ListGroup>
             </Col>
           </Row>
         </Container>
@@ -172,7 +135,7 @@ export class UserMenu extends React.Component {
 
    async handleSignoutSubmit(event) {
      event.preventDefault()
-     
+
      // Save current URL so user is redirected back here after signing out
      const cookies = new Cookies()
      cookies.set('redirect_url', window.location.pathname, { path: '/' })
@@ -180,7 +143,7 @@ export class UserMenu extends React.Component {
      await NextAuth.signout()
      Router.push('/')
    }
-   
+
   render() {
     if (this.props.session && this.props.session.user) {
       // If signed in display user dropdown menu
@@ -254,7 +217,7 @@ export class AdminMenuItem extends React.Component {
 export class SigninModal extends React.Component {
   render() {
     if (this.props.providers === null) return null
-    
+
     return (
       <Modal isOpen={this.props.modal} toggle={this.props.toggleModal} style={{maxWidth: 700}}>
         <ModalHeader>Sign up / Sign in</ModalHeader>

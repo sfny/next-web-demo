@@ -9,33 +9,26 @@ export default class extends Page {
     return (
       <Layout {...this.props} navmenu={false} container={false}>
         <Jumbotron className="text-light rounded-0" style={{
-          backgroundColor: 'rgba(73,155,234,1)',
-          background: 'radial-gradient(ellipse at center, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 100%)',
-          boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)'
+          backgroundColor: 'white',
           }}>
           <Container className="mt-2 mb-2">
             <h1 className="display-2 mb-3" style={{fontWeight: 300}}>
               <span style={{fontWeight: 600}}>
-                <span className="mr-3">▲</span>
                 <br className="v-block d-sm-none"/>
-                Next.js
+                Glean
               </span>
-              <br className="v-block d-lg-none"/> Starter Project
             </h1>
             <p className="lead mb-5">
-              A reference and template for React projects
-            </p>
-            <p className="text-right">
-              <a href="https://github.com/iaincollins/nextjs-starter" className="btn btn-outline-light btn-lg"><span className="icon ion-logo-github mr-2"/> Download from GitHub</a>
+              A Chat App for People Management
             </p>
             <style jsx>{`
               .display-2  {
-                text-shadow: 0 5px 10px rgba(0,0,0,0.3);
-                color: rgba(255,255,255,0.9);
+                color: black;
               }
               .lead {
                 font-size: 3em;
-                opacity: 0.7;
+                color: black;
+                opacity: 0.3;
               }
               @media (max-width: 767px) {
                 .display-2 {
@@ -50,9 +43,6 @@ export default class extends Page {
           </Container>
         </Jumbotron>
         <Container>
-          <p className="text-muted small">
-            * This project is not associated with Next.js or Zeit.
-          </p>
           <h2 className="text-center display-4 mt-5 mb-2">Features</h2>
           <Row className="pb-5">
             <Col xs="12" sm="4" className="pt-5">
@@ -86,7 +76,7 @@ export default class extends Page {
           <h2 className="text-center display-4 mt-2 mb-5">Getting Started</h2>
           <p>
             <a href="https://github.com/zeit/next.js">Next.js</a> from <a href="https://zeit.co">Zeit</a> makes creating
-            websites with React easy. 
+            websites with React easy.
           </p>
           <p>
             This project integrates several concepts to show how you can use them together in a Next.js project.
